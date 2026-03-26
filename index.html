@@ -10,8 +10,36 @@
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
         body { background:linear-gradient(145deg,#f9fafb 0%,#f3f4f6 100%); color:#1f2937; }
         .container { max-width:1400px; margin:0 auto; padding:0 1.5rem; }
-        .logo { display:flex; align-items:center; gap:0.5rem; font-size:2rem; font-weight:800; background:linear-gradient(135deg,#1e3a8a,#3b82f6); -webkit-background-clip:text; background-clip:text; color:transparent; }
-        .logo span { background:#f59e0b; padding:0.2rem 0.6rem; border-radius:1rem; color:white; font-size:1.2rem; }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .logo-letter {
+            width: 2.2rem;
+            height: 2.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.4rem;
+            border-radius: 0.8rem;
+            background: #3b82f6;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .logo-letter:nth-child(2) { background: #f59e0b; color: #1e293b; }
+        .logo-letter:nth-child(3) { background: #3b82f6; }
+        .logo-letter:nth-child(4) { background: #f59e0b; color: #1e293b; }
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-left: 0.5rem;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
         .navbar { background:white; border-radius:2rem; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); }
         .nav-links { display:flex; gap:1.5rem; align-items:center; }
         .nav-links a { text-decoration:none; color:#4b5563; font-weight:600; transition:0.2s; cursor:pointer; }
@@ -20,6 +48,51 @@
         .cart-count { position:absolute; top:-8px; right:-12px; background:#ef4444; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:bold; }
         .hero { background:linear-gradient(145deg,#1e3a8a,#3b82f6); border-radius:2rem; padding:3rem; color:white; margin-bottom:2rem; text-align:center; }
         .hero h1 { font-size:2.5rem; margin-bottom:1rem; }
+        .ad-banner {
+            background:white;
+            border-radius:1.5rem;
+            padding:1.5rem;
+            margin-bottom:2rem;
+            box-shadow:0 5px 15px rgba(0,0,0,0.05);
+        }
+        .ad-banner h3 {
+            margin-bottom:1rem;
+            color:#1e293b;
+            font-size:1.3rem;
+        }
+        .ad-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+            gap:1.5rem;
+        }
+        .ad-item {
+            background:#f8fafc;
+            border-radius:1rem;
+            overflow:hidden;
+            transition:0.2s;
+            border:1px solid #e2e8f0;
+        }
+        .ad-item:hover {
+            transform:translateY(-4px);
+            box-shadow:0 10px 20px rgba(0,0,0,0.1);
+        }
+        .ad-item img {
+            width:100%;
+            height:160px;
+            object-fit:cover;
+        }
+        .ad-item .ad-info {
+            padding:1rem;
+        }
+        .ad-item .ad-title {
+            font-weight:700;
+            margin-bottom:0.3rem;
+        }
+        .ad-item .ad-link {
+            font-size:0.8rem;
+            color:#3b82f6;
+            word-break:break-all;
+        }
         .product-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:2rem; margin:2rem 0; }
         .product-card { background:white; border-radius:1.5rem; overflow:hidden; box-shadow:0 10px 25px -5px rgba(0,0,0,0.05); transition:0.3s; }
         .product-card:hover { transform:translateY(-8px); box-shadow:0 20px 30px -10px rgba(0,0,0,0.15); }
@@ -33,16 +106,12 @@
         .btn { padding:0.6rem 1.2rem; border-radius:2rem; font-weight:600; cursor:pointer; transition:0.2s; border:none; }
         .btn-primary { background:#3b82f6; color:white; }
         .btn-primary:hover { background:#2563eb; transform:translateY(-2px); }
-        .btn-outline { background:white; border:2px solid #3b82f6; color:#3b82f6; }
-        .btn-outline:hover { background:#3b82f6; color:white; }
         .cart-sidebar { position:fixed; top:0; right:-400px; width:380px; height:100vh; background:white; box-shadow:-5px 0 20px rgba(0,0,0,0.1); transition:0.3s; z-index:1000; padding:1.5rem; display:flex; flex-direction:column; }
         .cart-sidebar.open { right:0; }
         .cart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
         .close-cart { background:none; border:none; font-size:1.5rem; cursor:pointer; }
         .cart-items { flex:1; overflow-y:auto; }
         .cart-item { display:flex; justify-content:space-between; align-items:center; padding:0.8rem 0; border-bottom:1px solid #e2e8f0; }
-        .cart-item-info h4 { font-size:1rem; }
-        .cart-item-price { font-size:0.9rem; color:#3b82f6; }
         .cart-item-actions { display:flex; gap:0.5rem; }
         .cart-item-actions button { background:#f1f5f9; border:none; width:28px; height:28px; border-radius:50%; cursor:pointer; }
         .cart-total { font-size:1.3rem; font-weight:700; margin:1rem 0; text-align:right; }
@@ -56,7 +125,7 @@
         .badge { display:inline-block; padding:0.2rem 0.6rem; border-radius:2rem; font-size:0.8rem; font-weight:600; }
         .badge-success { background:#d1fae5; color:#065f46; }
         .badge-warning { background:#fff3cd; color:#856404; }
-        .hidden { display:none; }
+        .invoice-item { border:1px solid #e2e8f0; border-radius:1rem; padding:1rem; margin-bottom:1rem; }
         footer { text-align:center; margin-top:3rem; color:#6b7280; }
     </style>
 </head>
@@ -64,8 +133,11 @@
 <div class="container">
     <div class="navbar">
         <div class="logo">
-            <i class="fas fa-cube"></i> 
-            <span>3</span><span>D</span><span>X</span><span>O</span> STORE
+            <div class="logo-letter">3</div>
+            <div class="logo-letter">D</div>
+            <div class="logo-letter">X</div>
+            <div class="logo-letter">O</div>
+            <div class="logo-text">STORE</div>
         </div>
         <div class="nav-links">
             <a id="homeLink">Home</a>
@@ -82,12 +154,16 @@
         <p>Kami membantu bisnis Anda hadir di dunia digital dengan layanan pembuatan website modern, responsif, dan SEO friendly.</p>
     </div>
 
-    <!-- Home / Products -->
+    <!-- Banner Iklan -->
+    <div id="adsContainer" class="ad-banner" style="display:none;">
+        <h3><i class="fas fa-ad"></i> Iklan Sponsor</h3>
+        <div id="adsList" class="ad-grid"></div>
+    </div>
+
     <div id="homePanel">
         <div id="productContainer" class="product-grid"></div>
     </div>
 
-    <!-- Tagihan Saya Panel -->
     <div id="invoicesPanel" style="display:none;">
         <div class="card">
             <h2 class="section-title">Tagihan Saya</h2>
@@ -100,7 +176,6 @@
         </div>
     </div>
 
-    <!-- Cart Sidebar -->
     <div class="overlay" id="overlay"></div>
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
@@ -116,17 +191,17 @@
 </div>
 
 <script>
-    // Storage keys (same as admin)
     const STORAGE_KEYS = {
         PRODUCTS: '3dxo_products',
         ORDERS: '3dxo_orders',
         INVOICES: '3dxo_invoices',
+        ADS: '3dxo_ads',
         CART: '3dxo_cart'
     };
-
     let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
     let orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || [];
     let invoices = JSON.parse(localStorage.getItem(STORAGE_KEYS.INVOICES)) || [];
+    let ads = JSON.parse(localStorage.getItem(STORAGE_KEYS.ADS)) || [];
     let cart = JSON.parse(localStorage.getItem(STORAGE_KEYS.CART)) || [];
 
     function saveCart() { localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart)); }
@@ -135,10 +210,7 @@
     function renderProducts() {
         const container = document.getElementById('productContainer');
         container.innerHTML = '';
-        if (products.length === 0) {
-            container.innerHTML = '<div class="card">Belum ada produk.</div>';
-            return;
-        }
+        if (products.length === 0) { container.innerHTML = '<div class="card">Belum ada produk.</div>'; return; }
         products.forEach(p => {
             const card = document.createElement('div');
             card.className = 'product-card';
@@ -155,7 +227,7 @@
             container.appendChild(card);
         });
         document.querySelectorAll('.add-to-cart').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', () => {
                 const id = btn.dataset.id;
                 const product = products.find(p => p.id === id);
                 if (product) addToCart(product);
@@ -185,7 +257,7 @@
             div.innerHTML = `
                 <div class="cart-item-info">
                     <h4>${item.name}</h4>
-                    <div class="cart-item-price">Rp ${item.price.toLocaleString()}</div>
+                    <div>Rp ${item.price.toLocaleString()}</div>
                 </div>
                 <div class="cart-item-actions">
                     <button class="cart-minus" data-id="${item.id}">-</button>
@@ -225,7 +297,6 @@
         document.getElementById('cartCount').innerText = count;
     }
 
-    // Cart sidebar
     const cartSidebar = document.getElementById('cartSidebar');
     const overlay = document.getElementById('overlay');
     function openCart() { cartSidebar.classList.add('open'); overlay.classList.add('show'); }
@@ -234,7 +305,6 @@
     document.getElementById('closeCart').addEventListener('click', closeCart);
     overlay.addEventListener('click', closeCart);
 
-    // Checkout
     document.getElementById('checkoutBtn').addEventListener('click', () => {
         if (cart.length === 0) return alert('Keranjang kosong');
         showCheckoutModal();
@@ -246,22 +316,10 @@
         modal.innerHTML = `
             <div class="modal-content">
                 <h3>Checkout</h3>
-                <div class="form-group">
-                    <label>Nama Lengkap</label>
-                    <input type="text" id="custName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="custEmail" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Nomor Telepon</label>
-                    <input type="text" id="custPhone" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Catatan</label>
-                    <textarea id="custNote" class="form-control" rows="2"></textarea>
-                </div>
+                <div class="form-group"><label>Nama Lengkap</label><input type="text" id="custName" class="form-control" required></div>
+                <div class="form-group"><label>Email</label><input type="email" id="custEmail" class="form-control" required></div>
+                <div class="form-group"><label>Nomor Telepon</label><input type="text" id="custPhone" class="form-control" required></div>
+                <div class="form-group"><label>Catatan</label><textarea id="custNote" class="form-control" rows="2"></textarea></div>
                 <button class="btn btn-primary" id="confirmOrder">Pesan Sekarang</button>
                 <button class="btn btn-outline" id="closeModal">Batal</button>
             </div>
@@ -297,20 +355,54 @@
         });
     }
 
-    // Tagihan Saya
+    // Render active ads
+    function renderAds() {
+        const activeAds = ads.filter(ad => ad.active);
+        const adsContainer = document.getElementById('adsContainer');
+        const adsList = document.getElementById('adsList');
+        if (activeAds.length === 0) {
+            adsContainer.style.display = 'none';
+            return;
+        }
+        adsContainer.style.display = 'block';
+        adsList.innerHTML = '';
+        activeAds.forEach(ad => {
+            const adDiv = document.createElement('div');
+            adDiv.className = 'ad-item';
+            adDiv.innerHTML = `
+                <a href="${ad.link}" target="_blank" rel="noopener noreferrer">
+                    <img src="${ad.imageUrl}" alt="${ad.title}">
+                    <div class="ad-info">
+                        <div class="ad-title">${ad.title}</div>
+                        <div class="ad-link">${ad.link}</div>
+                    </div>
+                </a>
+            `;
+            adsList.appendChild(adDiv);
+        });
+    }
+
+    // Auto-refresh products and ads every 3 seconds
+    function refreshData() {
+        const newProducts = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
+        const newAds = JSON.parse(localStorage.getItem(STORAGE_KEYS.ADS)) || [];
+        if (JSON.stringify(products) !== JSON.stringify(newProducts)) {
+            products = newProducts;
+            renderProducts();
+        }
+        if (JSON.stringify(ads) !== JSON.stringify(newAds)) {
+            ads = newAds;
+            renderAds();
+        }
+    }
+
+    // Navigation
     const homePanel = document.getElementById('homePanel');
     const invoicesPanelDiv = document.getElementById('invoicesPanel');
-    const invoicesLink = document.getElementById('invoicesLink');
     const homeLink = document.getElementById('homeLink');
-
-    homeLink.addEventListener('click', () => {
-        homePanel.style.display = 'block';
-        invoicesPanelDiv.style.display = 'none';
-    });
-    invoicesLink.addEventListener('click', () => {
-        homePanel.style.display = 'none';
-        invoicesPanelDiv.style.display = 'block';
-    });
+    const invoicesLink = document.getElementById('invoicesLink');
+    homeLink.addEventListener('click', () => { homePanel.style.display='block'; invoicesPanelDiv.style.display='none'; });
+    invoicesLink.addEventListener('click', () => { homePanel.style.display='none'; invoicesPanelDiv.style.display='block'; });
 
     document.getElementById('viewInvoicesBtn').addEventListener('click', () => {
         const email = document.getElementById('invoiceEmailInput').value.trim();
@@ -326,10 +418,8 @@
             const div = document.createElement('div');
             div.className = 'invoice-item';
             div.innerHTML = `
-                <div><strong>Nominal:</strong> Rp ${inv.amount.toLocaleString()}</div>
-                <div><strong>Deskripsi:</strong> ${inv.desc}</div>
-                <div><strong>Status:</strong> <span class="badge ${inv.paid ? 'badge-success' : 'badge-warning'}">${inv.paid ? 'Lunas' : 'Belum Dibayar'}</span></div>
-                <div><strong>Tanggal:</strong> ${new Date(inv.createdAt).toLocaleString()}</div>
+                <div><strong>Rp ${inv.amount.toLocaleString()}</strong> - ${inv.desc}</div>
+                <div>Status: <span class="badge ${inv.paid ? 'badge-success' : 'badge-warning'}">${inv.paid ? 'Lunas' : 'Belum Dibayar'}</span></div>
                 ${!inv.paid ? `<button class="btn btn-success" onclick="payInvoice('${inv.id}')">Bayar Tagihan</button>` : ''}
             `;
             container.appendChild(div);
@@ -340,25 +430,15 @@
         const idx = invoices.findIndex(i => i.id === id);
         if (idx !== -1) {
             invoices[idx].paid = true;
-            invoices[idx].paidAt = new Date().toISOString();
             localStorage.setItem(STORAGE_KEYS.INVOICES, JSON.stringify(invoices));
             alert('Pembayaran berhasil (simulasi). Tagihan telah dilunasi.');
-            // refresh display
             document.getElementById('viewInvoicesBtn').click();
         }
     };
 
-    // Auto-refresh produk setiap 2 detik
-    setInterval(() => {
-        const newProducts = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
-        if (JSON.stringify(products) !== JSON.stringify(newProducts)) {
-            products = newProducts;
-            renderProducts();
-        }
-    }, 2000);
-
-    // Initial render
+    setInterval(refreshData, 3000);
     renderProducts();
+    renderAds();
     updateCartUI();
     updateCartCount();
 </script>
