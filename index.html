@@ -7,92 +7,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* (Semua CSS sama seperti sebelumnya, termasuk style promo banner) */
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
         body { background:linear-gradient(145deg,#f9fafb 0%,#f3f4f6 100%); color:#1f2937; }
         .container { max-width:1400px; margin:0 auto; padding:0 1.5rem; }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        .logo-letter {
-            width: 2.2rem;
-            height: 2.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.4rem;
-            border-radius: 0.8rem;
-            background: #3b82f6;
-            color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
+        .logo { display: flex; align-items: center; gap: 0.3rem; }
+        .logo-letter { width: 2.2rem; height: 2.2rem; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; border-radius: 0.8rem; background: #3b82f6; color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .logo-letter:nth-child(2) { background: #f59e0b; color: #1e293b; }
         .logo-letter:nth-child(3) { background: #3b82f6; }
         .logo-letter:nth-child(4) { background: #f59e0b; color: #1e293b; }
-        .logo-text {
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-left: 0.5rem;
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
+        .logo-text { font-size: 1.6rem; font-weight: 800; margin-left: 0.5rem; background: linear-gradient(135deg, #1e3a8a, #3b82f6); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .navbar { background:white; border-radius:2rem; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); }
         .nav-links { display:flex; gap:1.5rem; align-items:center; }
         .nav-links a { text-decoration:none; color:#4b5563; font-weight:600; transition:0.2s; cursor:pointer; }
         .nav-links a:hover { color:#3b82f6; }
         .cart-icon { position:relative; cursor:pointer; font-size:1.3rem; }
         .cart-count { position:absolute; top:-8px; right:-12px; background:#ef4444; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:bold; }
+        .promo-banner {
+            background: linear-gradient(145deg, #1e1e2f, #2d2b4b);
+            border-radius: 2rem;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            display: none;
+        }
+        .promo-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem;
+        }
+        .promo-image { flex: 0 0 200px; text-align: center; }
+        .promo-image img { width: 100%; max-width: 180px; border-radius: 1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .promo-info { flex: 1; padding: 1rem 2rem; color: white; }
+        .promo-title { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; background: linear-gradient(135deg, #fff, #fbbf24); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .promo-badge { display: inline-block; background: #ef4444; color: white; font-weight: 800; padding: 0.3rem 1rem; border-radius: 2rem; font-size: 0.8rem; margin-bottom: 1rem; }
+        .promo-desc { font-size: 1.1rem; margin-bottom: 0.5rem; opacity: 0.9; }
+        .promo-small { font-size: 0.8rem; opacity: 0.7; margin-bottom: 1rem; }
+        .promo-price { font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin: 0.5rem 0; }
+        .promo-date { font-size: 0.9rem; background: rgba(255,255,255,0.2); display: inline-block; padding: 0.3rem 1rem; border-radius: 2rem; margin-top: 0.5rem; }
+        .promo-button { background: #fbbf24; color: #1e293b; border: none; padding: 0.8rem 2rem; border-radius: 3rem; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s; margin-top: 1rem; display: inline-block; }
+        .promo-button:hover { background: #f59e0b; transform: translateY(-2px); }
+        @media (max-width: 768px) { .promo-content { flex-direction: column; text-align: center; } .promo-info { padding: 1rem 0; } }
+        /* other styles same as previous buyer.html */
         .hero { background:linear-gradient(145deg,#1e3a8a,#3b82f6); border-radius:2rem; padding:3rem; color:white; margin-bottom:2rem; text-align:center; }
         .hero h1 { font-size:2.5rem; margin-bottom:1rem; }
-        .ad-banner {
-            background:white;
-            border-radius:1.5rem;
-            padding:1.5rem;
-            margin-bottom:2rem;
-            box-shadow:0 5px 15px rgba(0,0,0,0.05);
-        }
-        .ad-banner h3 {
-            margin-bottom:1rem;
-            color:#1e293b;
-            font-size:1.3rem;
-        }
-        .ad-grid {
-            display:grid;
-            grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
-            gap:1.5rem;
-        }
-        .ad-item {
-            background:#f8fafc;
-            border-radius:1rem;
-            overflow:hidden;
-            transition:0.2s;
-            border:1px solid #e2e8f0;
-        }
-        .ad-item:hover {
-            transform:translateY(-4px);
-            box-shadow:0 10px 20px rgba(0,0,0,0.1);
-        }
-        .ad-item img {
-            width:100%;
-            height:160px;
-            object-fit:cover;
-        }
-        .ad-item .ad-info {
-            padding:1rem;
-        }
-        .ad-item .ad-title {
-            font-weight:700;
-            margin-bottom:0.3rem;
-        }
-        .ad-item .ad-link {
-            font-size:0.8rem;
-            color:#3b82f6;
-            word-break:break-all;
-        }
         .product-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:2rem; margin:2rem 0; }
         .product-card { background:white; border-radius:1.5rem; overflow:hidden; box-shadow:0 10px 25px -5px rgba(0,0,0,0.05); transition:0.3s; }
         .product-card:hover { transform:translateY(-8px); box-shadow:0 20px 30px -10px rgba(0,0,0,0.15); }
@@ -149,15 +109,27 @@
         </div>
     </div>
 
+    <!-- Banner Promo dinamis -->
+    <div id="promoBanner" class="promo-banner">
+        <div class="promo-content">
+            <div class="promo-image">
+                <img id="promoImage" src="" alt="Promo">
+            </div>
+            <div class="promo-info">
+                <div id="promoBadge" class="promo-badge"></div>
+                <div id="promoTitle" class="promo-title"></div>
+                <div id="promoSubtitle" class="promo-desc"></div>
+                <div id="promoNote" class="promo-small"></div>
+                <div id="promoPrice" class="promo-price"></div>
+                <div id="promoDate" class="promo-date"></div>
+                <a id="promoButton" class="promo-button" href="#" target="_blank">Top Up Sekarang!</a>
+            </div>
+        </div>
+    </div>
+
     <div class="hero">
         <h1>Solusi Website Profesional</h1>
         <p>Kami membantu bisnis Anda hadir di dunia digital dengan layanan pembuatan website modern, responsif, dan SEO friendly.</p>
-    </div>
-
-    <!-- Banner Iklan -->
-    <div id="adsContainer" class="ad-banner" style="display:none;">
-        <h3><i class="fas fa-ad"></i> Iklan Sponsor</h3>
-        <div id="adsList" class="ad-grid"></div>
     </div>
 
     <div id="homePanel">
@@ -165,11 +137,11 @@
     </div>
 
     <div id="invoicesPanel" style="display:none;">
-        <div class="card">
+        <div class="card" style="background:white; border-radius:2rem; padding:1.8rem; margin-bottom:2rem;">
             <h2 class="section-title">Tagihan Saya</h2>
             <div class="form-group">
                 <label>Masukkan Email Anda</label>
-                <input type="email" id="invoiceEmailInput" class="form-control" placeholder="Email yang digunakan saat checkout atau pendaftaran">
+                <input type="email" id="invoiceEmailInput" class="form-control" placeholder="Email yang digunakan saat checkout">
                 <button id="viewInvoicesBtn" class="btn btn-primary" style="margin-top:0.5rem;">Lihat Tagihan</button>
             </div>
             <div id="userInvoicesList"></div>
@@ -178,10 +150,7 @@
 
     <div class="overlay" id="overlay"></div>
     <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Keranjang Belanja</h3>
-            <button class="close-cart" id="closeCart">&times;</button>
-        </div>
+        <div class="cart-header"><h3>Keranjang Belanja</h3><button class="close-cart" id="closeCart">&times;</button></div>
         <div class="cart-items" id="cartItems"></div>
         <div class="cart-total" id="cartTotal">Total: Rp 0</div>
         <button class="btn checkout-btn" id="checkoutBtn">Checkout</button>
@@ -196,17 +165,46 @@
         ORDERS: '3dxo_orders',
         INVOICES: '3dxo_invoices',
         ADS: '3dxo_ads',
+        PROMO: '3dxo_promo',
         CART: '3dxo_cart'
     };
     let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
     let orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || [];
     let invoices = JSON.parse(localStorage.getItem(STORAGE_KEYS.INVOICES)) || [];
-    let ads = JSON.parse(localStorage.getItem(STORAGE_KEYS.ADS)) || [];
     let cart = JSON.parse(localStorage.getItem(STORAGE_KEYS.CART)) || [];
+    let promo = JSON.parse(localStorage.getItem(STORAGE_KEYS.PROMO)) || {
+        active: true,
+        image: '',
+        badge: 'GRATIS!',
+        title: 'Bawa Pulang Idol Baru\nNANGONG YU!',
+        subtitle: 'Interknot Membership',
+        note: '*Berlaku untuk Produk Tertentu',
+        priceText: 'HARGA FINAL',
+        date: '24-30 Mar 2026',
+        buttonText: 'Top Up Sekarang!',
+        buttonLink: '#'
+    };
 
     function saveCart() { localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart)); }
 
-    // Render products
+    // Render promo banner
+    function renderPromoBanner() {
+        const bannerDiv = document.getElementById('promoBanner');
+        if (!promo.active) { bannerDiv.style.display = 'none'; return; }
+        bannerDiv.style.display = 'block';
+        document.getElementById('promoImage').src = promo.image || 'https://picsum.photos/id/104/200/200';
+        document.getElementById('promoBadge').innerText = promo.badge || 'GRATIS!';
+        document.getElementById('promoTitle').innerHTML = (promo.title || '').replace(/\n/g, '<br>');
+        document.getElementById('promoSubtitle').innerText = promo.subtitle || '';
+        document.getElementById('promoNote').innerText = promo.note || '';
+        document.getElementById('promoPrice').innerText = promo.priceText || 'HARGA FINAL';
+        document.getElementById('promoDate').innerText = promo.date || '';
+        const btn = document.getElementById('promoButton');
+        btn.innerText = promo.buttonText || 'Top Up Sekarang!';
+        btn.href = promo.buttonLink || '#';
+    }
+
+    // Render products (sama seperti sebelumnya)
     function renderProducts() {
         const container = document.getElementById('productContainer');
         container.innerHTML = '';
@@ -255,10 +253,7 @@
             const div = document.createElement('div');
             div.className = 'cart-item';
             div.innerHTML = `
-                <div class="cart-item-info">
-                    <h4>${item.name}</h4>
-                    <div>Rp ${item.price.toLocaleString()}</div>
-                </div>
+                <div class="cart-item-info"><h4>${item.name}</h4><div>Rp ${item.price.toLocaleString()}</div></div>
                 <div class="cart-item-actions">
                     <button class="cart-minus" data-id="${item.id}">-</button>
                     <span>${item.quantity}</span>
@@ -355,48 +350,7 @@
         });
     }
 
-    // Render active ads
-    function renderAds() {
-        const activeAds = ads.filter(ad => ad.active);
-        const adsContainer = document.getElementById('adsContainer');
-        const adsList = document.getElementById('adsList');
-        if (activeAds.length === 0) {
-            adsContainer.style.display = 'none';
-            return;
-        }
-        adsContainer.style.display = 'block';
-        adsList.innerHTML = '';
-        activeAds.forEach(ad => {
-            const adDiv = document.createElement('div');
-            adDiv.className = 'ad-item';
-            adDiv.innerHTML = `
-                <a href="${ad.link}" target="_blank" rel="noopener noreferrer">
-                    <img src="${ad.imageUrl}" alt="${ad.title}">
-                    <div class="ad-info">
-                        <div class="ad-title">${ad.title}</div>
-                        <div class="ad-link">${ad.link}</div>
-                    </div>
-                </a>
-            `;
-            adsList.appendChild(adDiv);
-        });
-    }
-
-    // Auto-refresh products and ads every 3 seconds
-    function refreshData() {
-        const newProducts = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
-        const newAds = JSON.parse(localStorage.getItem(STORAGE_KEYS.ADS)) || [];
-        if (JSON.stringify(products) !== JSON.stringify(newProducts)) {
-            products = newProducts;
-            renderProducts();
-        }
-        if (JSON.stringify(ads) !== JSON.stringify(newAds)) {
-            ads = newAds;
-            renderAds();
-        }
-    }
-
-    // Navigation
+    // Tagihan Saya
     const homePanel = document.getElementById('homePanel');
     const invoicesPanelDiv = document.getElementById('invoicesPanel');
     const homeLink = document.getElementById('homeLink');
@@ -436,9 +390,23 @@
         }
     };
 
-    setInterval(refreshData, 3000);
+    // Auto-refresh
+    setInterval(() => {
+        const newProducts = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
+        if (JSON.stringify(products) !== JSON.stringify(newProducts)) {
+            products = newProducts;
+            renderProducts();
+        }
+        const newPromo = JSON.parse(localStorage.getItem(STORAGE_KEYS.PROMO)) || {};
+        if (JSON.stringify(promo) !== JSON.stringify(newPromo)) {
+            Object.assign(promo, newPromo);
+            renderPromoBanner();
+        }
+    }, 3000);
+
+    // Initial render
     renderProducts();
-    renderAds();
+    renderPromoBanner();
     updateCartUI();
     updateCartCount();
 </script>
