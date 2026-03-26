@@ -7,50 +7,124 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* (Semua CSS sama seperti sebelumnya, termasuk style promo banner) */
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
         body { background:linear-gradient(145deg,#f9fafb 0%,#f3f4f6 100%); color:#1f2937; }
         .container { max-width:1400px; margin:0 auto; padding:0 1.5rem; }
-        .logo { display: flex; align-items: center; gap: 0.3rem; }
-        .logo-letter { width: 2.2rem; height: 2.2rem; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; border-radius: 0.8rem; background: #3b82f6; color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .logo-letter {
+            width: 2.2rem;
+            height: 2.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.4rem;
+            border-radius: 0.8rem;
+            background: #3b82f6;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
         .logo-letter:nth-child(2) { background: #f59e0b; color: #1e293b; }
         .logo-letter:nth-child(3) { background: #3b82f6; }
         .logo-letter:nth-child(4) { background: #f59e0b; color: #1e293b; }
-        .logo-text { font-size: 1.6rem; font-weight: 800; margin-left: 0.5rem; background: linear-gradient(135deg, #1e3a8a, #3b82f6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-left: 0.5rem;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
         .navbar { background:white; border-radius:2rem; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); }
         .nav-links { display:flex; gap:1.5rem; align-items:center; }
         .nav-links a { text-decoration:none; color:#4b5563; font-weight:600; transition:0.2s; cursor:pointer; }
         .nav-links a:hover { color:#3b82f6; }
         .cart-icon { position:relative; cursor:pointer; font-size:1.3rem; }
         .cart-count { position:absolute; top:-8px; right:-12px; background:#ef4444; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:bold; }
-        .promo-banner {
-            background: linear-gradient(145deg, #1e1e2f, #2d2b4b);
+        /* Banner Slider */
+        .banner-slider {
+            position: relative;
+            width: 100%;
+            margin-bottom: 2rem;
             border-radius: 2rem;
             overflow: hidden;
-            margin-bottom: 2rem;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            display: none;
+            aspect-ratio: 16 / 9;
+            background: #1e1e2f;
         }
-        .promo-content {
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slide a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.2rem;
+            transition: 0.2s;
+        }
+        .slider-btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        .dots {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
             display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding: 2rem;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
         }
-        .promo-image { flex: 0 0 200px; text-align: center; }
-        .promo-image img { width: 100%; max-width: 180px; border-radius: 1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        .promo-info { flex: 1; padding: 1rem 2rem; color: white; }
-        .promo-title { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; background: linear-gradient(135deg, #fff, #fbbf24); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .promo-badge { display: inline-block; background: #ef4444; color: white; font-weight: 800; padding: 0.3rem 1rem; border-radius: 2rem; font-size: 0.8rem; margin-bottom: 1rem; }
-        .promo-desc { font-size: 1.1rem; margin-bottom: 0.5rem; opacity: 0.9; }
-        .promo-small { font-size: 0.8rem; opacity: 0.7; margin-bottom: 1rem; }
-        .promo-price { font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin: 0.5rem 0; }
-        .promo-date { font-size: 0.9rem; background: rgba(255,255,255,0.2); display: inline-block; padding: 0.3rem 1rem; border-radius: 2rem; margin-top: 0.5rem; }
-        .promo-button { background: #fbbf24; color: #1e293b; border: none; padding: 0.8rem 2rem; border-radius: 3rem; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s; margin-top: 1rem; display: inline-block; }
-        .promo-button:hover { background: #f59e0b; transform: translateY(-2px); }
-        @media (max-width: 768px) { .promo-content { flex-direction: column; text-align: center; } .promo-info { padding: 1rem 0; } }
-        /* other styles same as previous buyer.html */
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
         .hero { background:linear-gradient(145deg,#1e3a8a,#3b82f6); border-radius:2rem; padding:3rem; color:white; margin-bottom:2rem; text-align:center; }
         .hero h1 { font-size:2.5rem; margin-bottom:1rem; }
         .product-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:2rem; margin:2rem 0; }
@@ -109,22 +183,14 @@
         </div>
     </div>
 
-    <!-- Banner Promo dinamis -->
-    <div id="promoBanner" class="promo-banner">
-        <div class="promo-content">
-            <div class="promo-image">
-                <img id="promoImage" src="" alt="Promo">
-            </div>
-            <div class="promo-info">
-                <div id="promoBadge" class="promo-badge"></div>
-                <div id="promoTitle" class="promo-title"></div>
-                <div id="promoSubtitle" class="promo-desc"></div>
-                <div id="promoNote" class="promo-small"></div>
-                <div id="promoPrice" class="promo-price"></div>
-                <div id="promoDate" class="promo-date"></div>
-                <a id="promoButton" class="promo-button" href="#" target="_blank">Top Up Sekarang!</a>
-            </div>
+    <!-- Banner Slider -->
+    <div class="banner-slider" id="bannerSlider" style="display: none;">
+        <div class="slider-container" id="sliderContainer">
+            <!-- slides will be added here -->
         </div>
+        <button class="slider-btn prev" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn next" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+        <div class="dots" id="dotsContainer"></div>
     </div>
 
     <div class="hero">
@@ -164,45 +230,82 @@
         PRODUCTS: '3dxo_products',
         ORDERS: '3dxo_orders',
         INVOICES: '3dxo_invoices',
-        ADS: '3dxo_ads',
-        PROMO: '3dxo_promo',
-        CART: '3dxo_cart'
+        CART: '3dxo_cart',
+        BANNERS: '3dxo_banners'
     };
     let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
     let orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || [];
     let invoices = JSON.parse(localStorage.getItem(STORAGE_KEYS.INVOICES)) || [];
     let cart = JSON.parse(localStorage.getItem(STORAGE_KEYS.CART)) || [];
-    let promo = JSON.parse(localStorage.getItem(STORAGE_KEYS.PROMO)) || {
-        active: true,
-        image: '',
-        badge: 'GRATIS!',
-        title: 'Bawa Pulang Idol Baru\nNANGONG YU!',
-        subtitle: 'Interknot Membership',
-        note: '*Berlaku untuk Produk Tertentu',
-        priceText: 'HARGA FINAL',
-        date: '24-30 Mar 2026',
-        buttonText: 'Top Up Sekarang!',
-        buttonLink: '#'
-    };
+    let banners = JSON.parse(localStorage.getItem(STORAGE_KEYS.BANNERS)) || [];
 
     function saveCart() { localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart)); }
 
-    // Render promo banner
-    function renderPromoBanner() {
-        const bannerDiv = document.getElementById('promoBanner');
-        if (!promo.active) { bannerDiv.style.display = 'none'; return; }
-        bannerDiv.style.display = 'block';
-        document.getElementById('promoImage').src = promo.image || 'https://picsum.photos/id/104/200/200';
-        document.getElementById('promoBadge').innerText = promo.badge || 'GRATIS!';
-        document.getElementById('promoTitle').innerHTML = (promo.title || '').replace(/\n/g, '<br>');
-        document.getElementById('promoSubtitle').innerText = promo.subtitle || '';
-        document.getElementById('promoNote').innerText = promo.note || '';
-        document.getElementById('promoPrice').innerText = promo.priceText || 'HARGA FINAL';
-        document.getElementById('promoDate').innerText = promo.date || '';
-        const btn = document.getElementById('promoButton');
-        btn.innerText = promo.buttonText || 'Top Up Sekarang!';
-        btn.href = promo.buttonLink || '#';
+    // Banner Slider
+    let currentSlide = 0;
+    let slideInterval;
+    const activeBanners = banners.filter(b => b.active);
+
+    function initSlider() {
+        const sliderContainer = document.getElementById('sliderContainer');
+        const dotsContainer = document.getElementById('dotsContainer');
+        const bannerSlider = document.getElementById('bannerSlider');
+        if (activeBanners.length === 0) {
+            bannerSlider.style.display = 'none';
+            return;
+        }
+        bannerSlider.style.display = 'block';
+        sliderContainer.innerHTML = '';
+        dotsContainer.innerHTML = '';
+        activeBanners.forEach((b, idx) => {
+            const slideDiv = document.createElement('div');
+            slideDiv.className = 'slide';
+            if (idx === 0) slideDiv.classList.add('active');
+            slideDiv.innerHTML = `<a href="${b.link}" target="_blank"><img src="${b.imageUrl}" alt="Banner"></a>`;
+            sliderContainer.appendChild(slideDiv);
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            if (idx === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(idx));
+            dotsContainer.appendChild(dot);
+        });
+        currentSlide = 0;
+        if (activeBanners.length > 1) {
+            if (slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlideAuto, 7000);
+        }
     }
+
+    function goToSlide(index) {
+        if (index === currentSlide) return;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = index;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+        // reset timer
+        if (activeBanners.length > 1) {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlideAuto, 7000);
+        }
+    }
+
+    function nextSlideAuto() {
+        if (activeBanners.length === 0) return;
+        let next = (currentSlide + 1) % activeBanners.length;
+        goToSlide(next);
+    }
+
+    function prevSlide() {
+        if (activeBanners.length === 0) return;
+        let prev = (currentSlide - 1 + activeBanners.length) % activeBanners.length;
+        goToSlide(prev);
+    }
+
+    document.getElementById('prevSlide').addEventListener('click', prevSlide);
+    document.getElementById('nextSlide').addEventListener('click', nextSlideAuto);
 
     // Render products (sama seperti sebelumnya)
     function renderProducts() {
@@ -397,16 +500,18 @@
             products = newProducts;
             renderProducts();
         }
-        const newPromo = JSON.parse(localStorage.getItem(STORAGE_KEYS.PROMO)) || {};
-        if (JSON.stringify(promo) !== JSON.stringify(newPromo)) {
-            Object.assign(promo, newPromo);
-            renderPromoBanner();
+        const newBanners = JSON.parse(localStorage.getItem(STORAGE_KEYS.BANNERS)) || [];
+        if (JSON.stringify(banners) !== JSON.stringify(newBanners)) {
+            banners = newBanners;
+            // update active banners and reinit slider
+            activeBanners.length = 0;
+            activeBanners.push(...banners.filter(b => b.active));
+            initSlider();
         }
     }, 3000);
 
-    // Initial render
     renderProducts();
-    renderPromoBanner();
+    initSlider();
     updateCartUI();
     updateCartCount();
 </script>
